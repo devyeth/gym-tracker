@@ -1,5 +1,4 @@
 import bankdruecken from "./images/Bankdrucken.jpg";
-import schraegbank from "./images/Schragbankdrucken.jpg";
 import schraegbankdruecken from "./images/Schragbankdrucken.jpg";
 import butterfly from "./images/Butterfly.jpg";
 import bauch from "./images/Bauch.jpg";
@@ -299,6 +298,15 @@ function Brust() {
             </div>
           ))}
         </div>
+      </div>
+
+      <div className="text-center mt-8">
+        <button
+          onClick={handleResetData}
+          className="px-6 py-2 bg-red-500 text-white rounded hover:bg-red-600"
+        >
+          Alle Daten zurücksetzen
+        </button>
       </div>
     </div>
   );
