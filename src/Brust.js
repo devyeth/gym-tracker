@@ -13,7 +13,7 @@ function Brust() {
   const [tempInputs, setTempInputs] = useState({});
   const [tempReps, setTempReps] = useState({});
   const userId = "shared_user_id";
-  const API_URL = "http://localhost:3005/api";
+  const API_URL = "/.netlify/functions/api";
 
   useEffect(() => {
     fetchWorkoutData();
