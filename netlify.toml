@@ -1,5 +1,5 @@
 [build]
-  command = "CI=false npm run build"
+  command = "CI=false && npm install && npm run build"
   publish = "build"
   functions = "functions"
 
@@ -26,4 +26,5 @@
   NODE_VERSION = "18"
   SKIP_PREFLIGHT_CHECK = "true"
   REACT_APP_API_URL = "https://gymbrotherz.netlify.app/.netlify/functions/api"
-  NODE_ENV = "production" 
+  NODE_ENV = "production"
+  NPM_FLAGS = "--legacy-peer-deps" 
