@@ -202,7 +202,12 @@ function Brust() {
                 <img
                   src={uebung.bild}
                   alt={uebung.titel}
-                  className="w-full h-full object-cover object-top rounded-lg"
+                  className={`w-full h-full object-cover ${
+                    uebung.titel === "Bankdrücken" ||
+                    uebung.titel === "Kettlebell"
+                      ? "object-top"
+                      : "object-center"
+                  } rounded-lg`}
                 />
               </div>
               <div className="space-y-2">
