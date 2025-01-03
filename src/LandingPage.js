@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import brustBild from "./images/12xasd3.png.jpg";
 
 function LandingPage() {
   const navigate = useNavigate();
@@ -19,7 +20,7 @@ function LandingPage() {
             className="w-full h-[200px] md:h-[400px] bg-blue-500 hover:bg-blue-600 text-white rounded-lg shadow-md text-2xl md:text-4xl font-bold flex flex-col items-center justify-center"
           >
             <img
-              src="/ich/12xasd3.png.jpg"
+              src={brustBild}
               alt="Brust"
               className="w-[150px] h-[150px] md:w-[300px] md:h-[300px] object-cover mb-2 md:mb-4 rounded-lg transition-all duration-300 hover:scale-125"
             />

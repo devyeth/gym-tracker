@@ -49,3 +49,7 @@ git add .; git commit -m "Update $(Get-Date -Format 'dd.MM.yyyy')"; git push ori
 
 taskkill /F /IM node.exe
 npm run dev
+
+# builden und deployen
+npm run build
+netlify deploy --prod

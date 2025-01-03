@@ -12,8 +12,10 @@ function Brust() {
   const [reps, setReps] = useState({});
   const [tempInputs, setTempInputs] = useState({});
   const [tempReps, setTempReps] = useState({});
+  const [showHistory, setShowHistory] = useState({});
+  const [history, setHistory] = useState({});
   const userId = "shared_user_id";
-  const API_URL = "/.netlify/functions/api";
+  const API_URL = "https://gymbrotherz.netlify.app/.netlify/functions/api";
 
   useEffect(() => {
     fetchWorkoutData();
@@ -142,6 +144,32 @@ function Brust() {
     }
   };
 
+  const fetchHistory = async (exercise) => {
+    try {
+      const response = await fetch(`${API_URL}/workout/${userId}`);
+      const workouts = await response.json();
+      const exerciseHistory = workouts
+        .filter((w) => w.exercise === exercise)
+        .sort((a, b) => new Date(b.date) - new Date(a.date));
+      setHistory((prev) => ({
+        ...prev,
+        [exercise]: exerciseHistory,
+      }));
+    } catch (error) {
+      console.error("Fehler beim Laden der Historie:", error);
+    }
+  };
+
+  const toggleHistory = (exercise) => {
+    setShowHistory((prev) => {
+      const newState = { ...prev, [exercise]: !prev[exercise] };
+      if (newState[exercise]) {
+        fetchHistory(exercise);
+      }
+      return newState;
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gray-100">
       <header>
@@ -239,6 +267,35 @@ function Brust() {
                   </div>
                 ))}
               </div>
+              <div className="mt-4">
+                <button
+                  onClick={() => toggleHistory(uebung.titel)}
+                  className="w-full bg-blue-500 text-white px-3 py-2 rounded-lg text-sm hover:bg-blue-600 transition-colors duration-300"
+                >
+                  {showHistory[uebung.titel]
+                    ? "Historie ausblenden"
+                    : "Historie anzeigen"}
+                </button>
+              </div>
+              {showHistory[uebung.titel] && history[uebung.titel] && (
+                <div className="mt-4 space-y-2">
+                  <h3 className="font-bold text-lg">Historie:</h3>
+                  <div className="max-h-60 overflow-y-auto">
+                    {history[uebung.titel].map((entry, i) => (
+                      <div key={i} className="bg-gray-50 p-2 rounded-lg mb-2">
+                        <div className="text-sm text-gray-600">
+                          {new Date(entry.date).toLocaleDateString("de-DE")}
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Satz {entry.setNumber}:</span>
+                          <span>{entry.weight} KG</span>
+                          <span>{entry.reps} Wdh</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
           ))}
         </div>
