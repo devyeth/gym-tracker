@@ -1,12 +1,14 @@
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import bankdruecken from "./images/Bankdrucken.jpg";
 import schraegbankdruecken from "./images/Schragbankdrucken.jpg";
 import butterfly from "./images/Butterfly.jpg";
 import bauch from "./images/Bauch.jpg";
 import kettleball from "./images/Kettleball.jpg";
 import trizeps from "./images/trizeps.jpg";
-import { useState, useEffect } from "react";
 
 function Brust() {
+  const navigate = useNavigate();
   const [weights, setWeights] = useState({});
   const [reps, setReps] = useState({});
   const [tempInputs, setTempInputs] = useState({});
@@ -174,6 +176,12 @@ function Brust() {
 
   return (
     <div className="min-h-screen bg-gray-100">
+      <button
+        onClick={() => navigate("/")}
+        className="absolute top-4 left-4 bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600"
+      >
+        ← Zurück
+      </button>
       <header>
         <h1 className="text-3xl font-bold text-center text-blue-600 font-mono py-4">
           Brustübungen
@@ -194,7 +202,12 @@ function Brust() {
                 <img
                   src={uebung.bild}
                   alt={uebung.titel}
-                  className="w-full h-full object-cover rounded-lg"
+                  className={`w-full h-full ${
+                    uebung.titel === "Bankdrücken" ||
+                    uebung.titel === "Kettlebell"
+                      ? "object-contain"
+                      : "object-cover"
+                  } rounded-lg`}
                 />
               </div>
               <div className="space-y-2">
