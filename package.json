@@ -23,6 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "dev": "concurrently \"npm run server\" \"npm start\"",
+    "dev:local": "concurrently \"cross-env PORT=3007 npm run server\" \"npm start\"",
     "server": "node server/server.js"
   },
   "eslintConfig": {

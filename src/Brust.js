@@ -14,7 +14,10 @@ function Brust() {
   const [showHistory, setShowHistory] = useState({});
   const [history, setHistory] = useState({});
   const userId = "shared_user_id";
-  const API_URL = "https://gymbrotherz.netlify.app/.netlify/functions/api";
+  const API_URL =
+    process.env.NODE_ENV === "production"
+      ? "https://gymbrotherz.netlify.app/.netlify/functions/api"
+      : "http://localhost:3007/api";
 
   useEffect(() => {
     fetchWorkoutData();
