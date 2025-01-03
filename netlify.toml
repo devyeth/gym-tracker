@@ -1,30 +1,13 @@
 [build]
-  command = "npm install && INLINE_RUNTIME_CHUNK=false CI=false npm run build"
+  command = "CI=false npm run build"
   publish = "build"
-  functions = "functions"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true
 
-[[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/api/:splat"
-  status = 200
-
-[functions]
-  node_bundler = "esbuild"
-  external_node_modules = ["express", "mongoose"]
-
-[functions.api]
-  timeout = 30
-
-[build.environment]
-  CI = "false"
-  NODE_VERSION = "18"
-  SKIP_PREFLIGHT_CHECK = "true"
-  REACT_APP_API_URL = "https://gymbrotherz.netlify.app/.netlify/functions/api"
-  NODE_ENV = "production"
-  NODE_OPTIONS = "--max_old_space_size=4096" 
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate" 
